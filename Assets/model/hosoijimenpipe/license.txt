@@ -1,0 +1,11 @@
+Model Information:
+* title:	Pipe
+* source:	https://sketchfab.com/3d-models/pipe-208473dfbc2741cb9f9dca0d1598a9de
+* author:	brand_onart (https://sketchfab.com/brand_onart)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Pipe" (https://sketchfab.com/3d-models/pipe-208473dfbc2741cb9f9dca0d1598a9de) by brand_onart (https://sketchfab.com/brand_onart) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
