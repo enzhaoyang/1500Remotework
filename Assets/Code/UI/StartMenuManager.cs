@@ -23,8 +23,8 @@ public class StartMenuManager : MonoBehaviour
         SceneManager.LoadScene(leaderboardSceneName);
     }
 
-    [Header("MainMenuへ戻る用")]
-    [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [Header("スタート画面へ戻る用（チームはstartシーンを使用）")]
+    [SerializeField] private string mainMenuSceneName = "start";
 
     public void OpenMainMenu()
     {
