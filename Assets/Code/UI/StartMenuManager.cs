@@ -22,4 +22,12 @@ public class StartMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(leaderboardSceneName);
     }
+
+    [Header("MainMenuへ戻る用")]
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
+
+    public void OpenMainMenu()
+    {
+        SceneManager.LoadScene(mainMenuSceneName);
+    }
 }
