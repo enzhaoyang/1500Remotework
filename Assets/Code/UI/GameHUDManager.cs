@@ -8,6 +8,9 @@ public class GameHUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI comboText;
 
+    // シーンをまたいでリザルト画面から参照できるStatic変数
+    public static int FinalScore = 0;
+
     private int score = 0;
     private int combo = 0;
     private float timeRemaining = 60f;
@@ -22,6 +25,7 @@ public class GameHUDManager : MonoBehaviour
         {
             timeRemaining = 0f;
             isGameRunning = false;
+            FinalScore = score; // タイムアップ時にスコアを保存
         }
 
         UpdateHUD();
