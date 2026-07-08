@@ -4,7 +4,7 @@ using UnityEngine;
 public class BlacksmithPipe : MonoBehaviour
 {
     [Header("移动与销毁")]
-    public float moveSpeed = 3.0f;
+    public float moveSpeed = 1.0f;
 
     [Header("打铁设置")]
     [Tooltip("被左手抓住后，需要等待多少秒才能砍")]
@@ -25,16 +25,17 @@ public class BlacksmithPipe : MonoBehaviour
 
     void Update()
     {
-        // 状态1和2：如果没有被抓住，就一直往前飞
-        if (currentState == PipeState.Flying || currentState == PipeState.InZone)
+        // 【修改点1】：把 Grabbed 和 ReadyToCut 也加进来！
+        // 这样只要铁棒还活着，它就会一直顺着原来的方向滑动，穿过你的手心！
+        if (currentState == PipeState.Flying || currentState == PipeState.InZone || currentState == PipeState.Grabbed || currentState == PipeState.ReadyToCut)
         {
-            // 这是你要的最重要的代码行：向我的正前方、基于自身局部坐标移动
+            // 保持你测试成功的 Vector3.up，绝不动它！
             transform.Translate(Vector3.up * moveSpeed * Time.deltaTime, Space.Self);
-
-            // ⚠️ 物理清理代码（之前给你的正确版代码已经去掉了 Update 里的 Destroy，请确认你使用的是正确版本）
         }
-        // 状态3：被左手抓住了，停在原地开始倒计时
-        else if (currentState == PipeState.Grabbed)
+
+        // 【修改点2】：把 else if 改成独立的 if
+        // 状态3：被左手抓住了，一边在手心里滑动，一边开始加热倒计时
+        if (currentState == PipeState.Grabbed)
         {
             timer += Time.deltaTime;
             if (timer >= waitTimeBeforeCut)
@@ -56,14 +57,32 @@ public class BlacksmithPipe : MonoBehaviour
             currentState = PipeState.InZone;
         }
 
-        // 2. 碰到了左手 -> 【改动】：去掉前置条件，只要左手碰到，无脑抓住！
+        // 2. 碰到了左手 -> 无脑抓住！
         if (other.CompareTag("LeftHand")) 
         {
             currentState = PipeState.Grabbed; // 改变状态，停止移动
             Debug.Log("左手抓住了！开始加热...");
             
-            // 让铁管变成左手的子物体
+            // 1. 认左手做父物体
             transform.SetParent(other.transform); 
+            
+            // 2. 物理急刹车（最关键！）
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true; // 开启运动学，完全无视物理碰撞和受力
+                rb.useGravity = false; // 彻底关掉重力
+                
+                // 清空它身上的所有惯性和速度！防止挥手时滑脱！
+                rb.linearVelocity = Vector3.zero; 
+                rb.angularVelocity = Vector3.zero; 
+            }
+
+            // 3. 吸附到掌心
+            transform.localPosition = Vector3.zero; 
+            
+            // （可选）如果你发现吸到手上后，铁棒的方向歪了，取消下面这行的注释并修改数字
+            // transform.localEulerAngles = new Vector3(90, 0, 0); 
         }
 
         // 3. 碰到了右手拿的刀！
