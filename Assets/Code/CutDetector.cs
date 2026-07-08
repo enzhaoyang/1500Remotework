@@ -1,16 +1,30 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CutDetector : MonoBehaviour
 {
     [Header("判定设置")]
     [Tooltip("设定的完美切断时间（秒）")]
     public float targetTime = 3.0f; // 假设铁管伸出后第3秒是最佳切断点
-    
+
     [Tooltip("Perfect 允许的时间误差")]
-    public float perfectWindow = 0.05f; 
-    
+    public float perfectWindow = 0.05f;
+
     [Tooltip("Great 允许的时间误差")]
-    public float greatWindow = 0.12f;   
+    public float greatWindow = 0.12f;
+
+    [Header("スコア設定")]
+    [SerializeField] private int perfectScore = 100;
+    [SerializeField] private int greatScore = 50;
+
+    [Header("判定結果イベント")]
+    [Tooltip("InspectorでJudgementDisplay.ShowPerfect等を接続する")]
+    public UnityEvent onPerfect;
+    public UnityEvent onGreat;
+    public UnityEvent onMiss;
+
+    [Tooltip("InspectorでGameHUDManager.AddScore(int)を接続する。引数は加算スコア")]
+    public IntUnityEvent onScoreAdded;
 
     // 临时用来模拟游戏运行的时间计时器
     private float gameTimer = 0f;
@@ -42,14 +56,19 @@ public class CutDetector : MonoBehaviour
         if (diff <= perfectWindow)
         {
             Debug.Log($"<color=green>【Perfect!!】</color> 误差: {diff:F3}秒");
+            onPerfect?.Invoke();
+            onScoreAdded?.Invoke(perfectScore);
         }
         else if (diff <= greatWindow)
         {
             Debug.Log($"<color=yellow>【Great!】</color> 误差: {diff:F3}秒");
+            onGreat?.Invoke();
+            onScoreAdded?.Invoke(greatScore);
         }
         else
         {
             Debug.Log($"<color=red>【Miss...】</color> 误差: {diff:F3}秒 (太早或太晚)");
+            onMiss?.Invoke();
         }
 
         // 测试阶段：2秒后重置状态，方便你在场景里反复拖拽测试
@@ -63,3 +82,7 @@ public class CutDetector : MonoBehaviour
         Debug.Log("--- 铁管已重置，可以再次测试切断 ---");
     }
 }
+
+// UnityEvent<int>はInspectorに表示するため非ジェネリックなサブクラスが必要
+[System.Serializable]
+public class IntUnityEvent : UnityEvent<int> { }

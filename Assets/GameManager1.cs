@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI missCountText;    // MISS用のテキスト
     public TextMeshProUGUI rankText;         // 右上のデカいS,A,Bランク用テキスト
 
+    [Header("=== シーン名 (Build Settings に登録すること) ===")]
+    [SerializeField] private string gamePlaySceneName = "GamePlay";
+    [SerializeField] private string mainMenuSceneName = "start";
+
     void Start()
     {
         // 画面が起動したら自動的にリザルトの数字を表示する
@@ -25,30 +29,24 @@ public class GameManager : MonoBehaviour
     // --- 画面切り替え用の関数（ボタンに設定する） ---
     public void LoadGameScene()
     {
-        // データを一度リセットして、ゲーム画面（仮）へ切り替える
-        PlayerPrefs.SetInt("LatestScore", 0);
-        PlayerPrefs.SetInt("PerfectCount", 0);
-        PlayerPrefs.SetInt("GreatCount", 0);
-        PlayerPrefs.SetInt("MissCount", 0);
-        SceneManager.LoadScene("GameScene"); // ※ゲーム画面のシーン名
+        SceneManager.LoadScene(gamePlaySceneName);
     }
 
     public void LoadStartScene()
     {
-        SceneManager.LoadScene("StartScene"); // ※スタート画面のシーン名
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     // ==========================================
-    // ★吉岡さんのリザルト画面にデータを反映させる処理
+    // ★リザルト画面にデータを反映させる処理
+    // GameHUDManager(GamePlayシーン)のstatic変数からスコア・判定回数を読み込む
     // ==========================================
     void ShowResult()
     {
-        // 本番時はゲーム中から保存されたデータを読み込みます
-        // （今はまだゲーム中を作っていないので、初期値として0が入ります）
-        int score = PlayerPrefs.GetInt("LatestScore", 0);
-        int perfects = PlayerPrefs.GetInt("PerfectCount", 0);
-        int greats = PlayerPrefs.GetInt("GreatCount", 0);
-        int misses = PlayerPrefs.GetInt("MissCount", 0);
+        int score = GameHUDManager.FinalScore;
+        int perfects = GameHUDManager.FinalPerfectCount;
+        int greats = GameHUDManager.FinalGreatCount;
+        int misses = GameHUDManager.FinalMissCount;
 
         // ※テスト用：もしUnityの再生ボタンを押してすぐに数字が変わるか確認したい場合は、
         // 下の「//」を消して、好きな数字を入れてテストしてみてください。
