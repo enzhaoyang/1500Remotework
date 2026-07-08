@@ -9,6 +9,6 @@ public class PipeMover : MonoBehaviour
     void Update()
     {
         // 让铁管每一帧都沿着 Z 轴的反方向（也就是朝着玩家的面朝方向）移动
-        transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(-1 * Vector3.back * moveSpeed * Time.deltaTime, Space.World);
     }
 }

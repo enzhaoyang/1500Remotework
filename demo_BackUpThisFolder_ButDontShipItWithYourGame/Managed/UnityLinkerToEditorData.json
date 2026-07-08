@@ -417,7 +417,9 @@
           },
           {
             "name": "SkinnedMeshRenderer",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
