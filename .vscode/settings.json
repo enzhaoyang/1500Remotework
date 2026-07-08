@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "1500Remotework.slnx"
+    "dotnet.defaultSolution": "1500remotework.slnx"
 }
