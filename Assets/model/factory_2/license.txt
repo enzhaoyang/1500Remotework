@@ -1,0 +1,8 @@
+Model Information:
+* title:	Factory 2
+* source:	https://sketchfab.com/3d-models/factory-2-6008463e2bc149bfab4ef4284a098a41
+* author:	Pasha (https://sketchfab.com/Pasha.)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
