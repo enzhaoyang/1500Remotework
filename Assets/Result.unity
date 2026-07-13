@@ -515,7 +515,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1631677783}
+      - m_Target: {fileID: 63047251}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadStartScene
         m_Mode: 1
@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1631677783}
+      - m_Target: {fileID: 63047251}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadGameScene
         m_Mode: 1
@@ -1564,55 +1564,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594865644}
   m_CullTransparentMesh: 1
---- !u!1 &1631677782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1631677784}
-  - component: {fileID: 1631677783}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1631677783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631677782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6827a361a88bd421f8b0e3b90c5a0a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  resultScoreText: {fileID: 1306224851}
-  perfectCountText: {fileID: 1182942655}
-  greatCountText: {fileID: 1644840371}
-  missCountText: {fileID: 587606042}
-  rankText: {fileID: 1963474933}
---- !u!4 &1631677784
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631677782}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 268.78137, y: 0.00001, z: 866.6519}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1644840368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,5 +2066,4 @@ SceneRoots:
   - {fileID: 268061011}
   - {fileID: 770190295}
   - {fileID: 1004751253}
-  - {fileID: 1631677784}
   - {fileID: 63047252}
