@@ -56,6 +56,7 @@ public class GameHUDManager : MonoBehaviour
         FinalPerfectCount = perfectCount;
         FinalGreatCount = greatCount;
         FinalMissCount = missCount;
+        LeaderboardManager.AddScore(score); // ランキングに今回のスコアを保存
     }
 
     private void UpdateHUD()
