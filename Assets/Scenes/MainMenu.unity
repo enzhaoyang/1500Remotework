@@ -946,6 +946,7 @@ MonoBehaviour:
   gamePlaySceneName: GamePlay
   tutorialSceneName: Tutorial
   leaderboardSceneName: Leaderboard
+  mainMenuSceneName: start
 --- !u!4 &1251604193
 Transform:
   m_ObjectHideFlags: 0

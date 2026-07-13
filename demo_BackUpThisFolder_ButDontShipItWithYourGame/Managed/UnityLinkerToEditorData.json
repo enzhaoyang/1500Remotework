@@ -11,7 +11,8 @@
           {
             "name": "AnimationClip",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -19,7 +20,8 @@
           {
             "name": "Animator",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -27,7 +29,8 @@
           {
             "name": "AnimatorController",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -41,7 +44,8 @@
           {
             "name": "Avatar",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -77,21 +81,27 @@
           {
             "name": "AudioBehaviour",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "AudioClip",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "AudioListener",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -104,13 +114,17 @@
           },
           {
             "name": "AudioResource",
-            "scenes": [],
-            "dependencyType": 1,
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
+            "dependencyType": 0,
             "icon": null
           },
           {
             "name": "AudioSource",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -140,7 +154,9 @@
           {
             "name": "Camera",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -162,7 +178,9 @@
           {
             "name": "Cubemap",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -182,7 +200,9 @@
           {
             "name": "EditorExtension",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -196,7 +216,9 @@
           {
             "name": "GameObject",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -228,7 +250,9 @@
           {
             "name": "LevelGameManager",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -236,7 +260,9 @@
           {
             "name": "Light",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -262,7 +288,9 @@
           {
             "name": "LightmapSettings",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -270,7 +298,9 @@
           {
             "name": "LineRenderer",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -284,7 +314,9 @@
           {
             "name": "Material",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -292,7 +324,9 @@
           {
             "name": "Mesh",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -300,7 +334,9 @@
           {
             "name": "MeshFilter",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -308,7 +344,9 @@
           {
             "name": "MeshRenderer",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -316,7 +354,9 @@
           {
             "name": "MonoBehaviour",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -330,7 +370,9 @@
           {
             "name": "MonoScript",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -338,7 +380,9 @@
           {
             "name": "NamedObject",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -376,7 +420,9 @@
           {
             "name": "RectTransform",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -390,7 +436,9 @@
           {
             "name": "RenderSettings",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -424,7 +472,9 @@
           {
             "name": "Shader",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -438,7 +488,9 @@
           {
             "name": "SkinnedMeshRenderer",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -967,13 +1019,17 @@
         "dependencies": [
           {
             "name": "BoxCollider",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "CapsuleCollider",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -991,7 +1047,9 @@
           },
           {
             "name": "MeshCollider",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -1003,7 +1061,9 @@
           },
           {
             "name": "Rigidbody",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GamePlay.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -1407,7 +1467,9 @@
           {
             "name": "Font",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -1456,7 +1518,9 @@
           {
             "name": "Canvas",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -1470,7 +1534,9 @@
           {
             "name": "CanvasRenderer",
             "scenes": [
-              "Assets/Scenes/start.unity"
+              "Assets/Scenes/GamePlay.unity",
+              "Assets/Scenes/start.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
