@@ -79,7 +79,9 @@ public static class WarningUISetupTool
 
         if (Object.FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>() == null)
         {
-            GameObject es = new GameObject("EventSystem", typeof(UnityEngine.EventSystems.EventSystem), typeof(UnityEngine.EventSystems.StandaloneInputModule));
+            // Active Input HandlerがInput System Package (New)のみの設定のため、
+            // 旧StandaloneInputModuleではなく新方式を使う。
+            GameObject es = new GameObject("EventSystem", typeof(UnityEngine.EventSystems.EventSystem), typeof(UnityEngine.InputSystem.UI.InputSystemUIInputModule));
             Undo.RegisterCreatedObjectUndo(es, "Create EventSystem");
         }
 
