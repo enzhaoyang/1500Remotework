@@ -64,17 +64,17 @@ public class GameManager : MonoBehaviour
         // 核心修改：1分钟的 S, A, B, C 评级与颜色
         if (rankText != null)
         {
-            if (score >= 1000) 
+            if (score >= 500) 
             {
                 rankText.text = "S";
                 rankText.color = Color.yellow; // 金色 S级
             } 
-            else if (score >= 700) 
+            else if (score >= 400) 
             {
                 rankText.text = "A";
                 rankText.color = new Color(1f, 0.5f, 0f); // 橙色 A级
             } 
-            else if (score >= 400)
+            else if (score >= 200)
             {
                 rankText.text = "B";
                 rankText.color = Color.green; // 绿色 B级

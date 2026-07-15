@@ -518,6 +518,7 @@
           {
             "name": "SkinnedMeshRenderer",
             "scenes": [
+              "Assets/Scenes/GamePlay.unity",
               "Assets/Scenes/Result.unity",
               "Assets/Scenes/start.unity",
               "Assets/Scenes/Tutorial.unity"

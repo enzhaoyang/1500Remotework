@@ -9682,7 +9682,7 @@ IL_0105:
 	{
 		//<source_info:/Users/zhaoyang/projects/unity/1500remotework/Assets/GameManager1.cs:67>
 		int32_t L_38 = V_0;
-		if ((((int32_t)L_38) < ((int32_t)((int32_t)1000))))
+		if ((((int32_t)L_38) < ((int32_t)((int32_t)500))))
 		{
 			goto IL_013f;
 		}
@@ -9705,7 +9705,7 @@ IL_013f:
 	{
 		//<source_info:/Users/zhaoyang/projects/unity/1500remotework/Assets/GameManager1.cs:72>
 		int32_t L_42 = V_0;
-		if ((((int32_t)L_42) < ((int32_t)((int32_t)700))))
+		if ((((int32_t)L_42) < ((int32_t)((int32_t)400))))
 		{
 			goto IL_0177;
 		}
@@ -9729,7 +9729,7 @@ IL_0177:
 	{
 		//<source_info:/Users/zhaoyang/projects/unity/1500remotework/Assets/GameManager1.cs:77>
 		int32_t L_46 = V_0;
-		if ((((int32_t)L_46) < ((int32_t)((int32_t)400))))
+		if ((((int32_t)L_46) < ((int32_t)((int32_t)200))))
 		{
 			goto IL_01a0;
 		}
