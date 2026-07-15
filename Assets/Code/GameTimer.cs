@@ -1,23 +1,24 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement; // 1. Added this line for scene switching (Very Important!)
 
 public class GameTimer : MonoBehaviour
 {
-    [Header("把刚才做好的 TMP 文本拖到这里")]
+    [Header("Drag the TMP Text component here")]
     public TextMeshProUGUI timerText;
 
-    [Header("在这里设置倒计时时间（秒），可在面板随时修改！")]
-    public float timeLimit = 60f; // 默认60秒
+    [Header("Set the time limit (in seconds) here")]
+    public float timeLimit = 60f; 
 
     private float currentTime;
     private bool isTimerRunning = false;
 
     void Start()
     {
-        // 游戏开始时，把当前时间设为你面板里填写的限时
+        // Set current time to the configured time limit when game starts
         currentTime = timeLimit;
         
-        // 自动开始倒计时，不需要可以注释掉
+        // Automatically start the timer
         StartTimer(); 
     }
 
@@ -25,40 +26,41 @@ public class GameTimer : MonoBehaviour
     {
         if (isTimerRunning)
         {
-            // 核心改变：从加时间变成了减时间
+            // Subtract time
             currentTime -= Time.deltaTime; 
 
-            // 防止时间变成负数
+            // Prevent time from dropping below zero
             if (currentTime <= 0)
             {
                 currentTime = 0;
-                isTimerRunning = false; // 停止计时
-                Debug.Log("时间到！任务结束！");
+                isTimerRunning = false; // Stop the timer
                 
-                // ⚠️ 以后你可以把时间到了、打铁失败的代码写在这里
+                Debug.Log("Time's up! Loading Result scene...");
+                
+                // 2. Added this line: Load the Result scene when time hits 0
+                SceneManager.LoadScene("Result"); 
             }
 
             UpdateTimerDisplay();
         }
     }
 
-    // 格式化时间并显示到屏幕上
+    // Format and display the timer
     private void UpdateTimerDisplay()
     {
         int minutes = Mathf.FloorToInt(currentTime / 60F);
         int seconds = Mathf.FloorToInt(currentTime - minutes * 60);
         
-        // 如果倒计时不需要毫秒，把这一行和下面的 {2:00} 删掉即可
         int milliseconds = Mathf.FloorToInt((currentTime * 100F) % 100F); 
 
         timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
     }
 
-    // 控制计时器的方法
+    // Timer control methods
     public void StartTimer() => isTimerRunning = true;
     public void StopTimer() => isTimerRunning = false;
     
-    // 如果你想重新开始任务，调用这个方法就能恢复满时间
+    // Reset the timer to full time limit
     public void ResetTimer()
     {
         currentTime = timeLimit;

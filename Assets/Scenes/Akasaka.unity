@@ -251,8 +251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutDetector
   missZPosition: -2
-  perfectScore: 100
-  greatScore: 50
   onPerfect:
     m_PersistentCalls:
       m_Calls: []
@@ -1597,7 +1595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6efd78501548e04c96794fe1fee64d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -3.801
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6efd78501548e04c96794fe1fee64d6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1726,6 +1724,14 @@ PrefabInstance:
     - target: {fileID: -8581761376589790641, guid: f6efd78501548e04c96794fe1fee64d6, type: 3}
       propertyPath: 'm_Bones.Array.data[60]'
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -3032474722913931096, guid: f6efd78501548e04c96794fe1fee64d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3032474722913931096, guid: f6efd78501548e04c96794fe1fee64d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.95
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f6efd78501548e04c96794fe1fee64d6, type: 3}
       propertyPath: m_Name

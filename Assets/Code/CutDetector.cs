@@ -4,50 +4,74 @@ using UnityEngine.Events;
 public class CutDetector : MonoBehaviour
 {
     [Header("销毁设置")]
-    [Tooltip("铁管飞到玩家身后多远时自动销毁（Z轴坐标）")]
     public float missZPosition = -2.0f;
 
-    [Header("スコア設定")]
-    [SerializeField] private int perfectScore = 100;
-    [SerializeField] private int greatScore = 50;
-
-    [Header("判定結果イベント")]
-    [Tooltip("InspectorでJudgementDisplay.ShowPerfect等を接続する")]
     public UnityEvent onPerfect;
     public UnityEvent onGreat;
     public UnityEvent onMiss;
-
-    [Tooltip("InspectorでGameHUDManager.AddScore(int)を接続する。引数は加算スコア")]
     public IntUnityEvent onScoreAdded;
+
+    private IronCutHUD hudManager;
+    
+    // 物理起跑线的坐标
+    private Vector3 startPos;
+    // 是否已经离开起跑线，开始计米数
+    private bool isCounting = false;
+
+    void Start()
+    {
+        hudManager = FindObjectOfType<IronCutHUD>();
+    }
 
     void Update()
     {
-        // 垃圾回收：如果铁管飞过了玩家身后（Z坐标小于设定值），就判定为 Miss 并销毁
+        // 只要开始测距，就每帧算出自己跑了多远，告诉大屏幕
+        if (isCounting && hudManager != null)
+        {
+            float distanceTravelled = Vector3.Distance(transform.position, startPos);
+            hudManager.UpdatePhysicalDistance(distanceTravelled);
+        }
+
+        // 错过销毁逻辑
         if (transform.position.z < missZPosition)
         {
-            Debug.Log("Miss... 铁管飞走了！");
+            if (hudManager != null) hudManager.StartNewRound(RandomTarget());
             onMiss?.Invoke();
-            Destroy(gameObject); // 销毁自己
-        }
-    }
-
-    // 当有其他碰撞体（比如刀）进入铁管的触发器时
-    private void OnTriggerEnter(Collider other)
-    {
-        // 判断碰我们的是不是标签为 "Knife" 的物体
-        if (other.CompareTag("Knife"))
-        {
-            // 这里可以接入更复杂的逻辑，比如判断此时铁管是不是在那个“判定框”里面
-            Debug.Log("Perfect! 切割成功！");
-            onPerfect?.Invoke();
-            onScoreAdded?.Invoke(perfectScore);
-
-            // 稍后我们可以换成断成两截的动画或粒子特效，现在先直接让它消失
             Destroy(gameObject);
         }
     }
+
+    // ====== 核心：离开起跑区，开始测距！ ======
+    private void OnTriggerExit(Collider other)
+    {
+        // 如果我们离开了那个带有 "StartZone" 标签的门
+        if (other.CompareTag("StartZone") && !isCounting)
+        {
+            startPos = transform.position; // 锁定此时的坐标为 0米 刻度
+            isCounting = true; // 开始推数据给屏幕
+        }
+    }
+
+    // 刀砍判定
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Knife"))
+        {
+            if (hudManager != null)
+            {
+                // 砍中的瞬间，算出最终距离，扔给屏幕去判定！
+                float finalDist = isCounting ? Vector3.Distance(transform.position, startPos) : 0f;
+                hudManager.EvaluateCut(finalDist);
+            }
+            Destroy(gameObject);
+        }
+    }
+    
+    private float RandomTarget()
+    {
+        return Mathf.Round(Random.Range(3.0f, 7.0f) * 10f) / 10f;
+    }
 }
 
-// UnityEvent<int>はInspectorに表示するため非ジェネリックなサブクラスが必要
 [System.Serializable]
 public class IntUnityEvent : UnityEvent<int> { }

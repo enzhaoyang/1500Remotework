@@ -19,7 +19,7 @@ public class BlacksmithManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI warningText; // 【新增】拖入刚刚做好的 WarningText
     
-    private int currentScore = 0;
+    public int currentScore = 0;
 
     void Awake()
     {
@@ -53,11 +53,11 @@ public class BlacksmithManager : MonoBehaviour
                 if (warningText != null)
                 {
                     if (randomIndex == 0) 
-                        warningText.text = "⬅️ 准备：左边！";
+                        warningText.text = "Ready：left！";
                     else if (randomIndex == 1) 
-                        warningText.text = "⬇️ 准备：中间！";
+                        warningText.text = "Ready：middle！";
                     else 
-                        warningText.text = "➡️ 准备：右边！";
+                        warningText.text = "Ready：right！";
                         
                     warningText.color = Color.yellow; // 变成醒目的警告黄
                 }

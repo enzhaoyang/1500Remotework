@@ -242,7 +242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlacksmithPipe
   moveSpeed: 3
-  waitTimeBeforeCut: 2
+  grabbedMoveSpeed: 0.8
+  warningSound: {fileID: 8300000, guid: 14f8115c88c9048b98ee078d29b0dfe4, type: 3}
+  grabSound: {fileID: 8300000, guid: 56f5fc1da24c542e895053fd9bc44489, type: 3}
+  cutSound: {fileID: 8300000, guid: c25426ae154b540beae61d12a3322438, type: 3}
 --- !u!54 &1447042179277124216
 Rigidbody:
   m_ObjectHideFlags: 0

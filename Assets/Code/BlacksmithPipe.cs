@@ -5,91 +5,129 @@ public class BlacksmithPipe : MonoBehaviour
 {
     [Header("移动与销毁")]
     public float moveSpeed = 3.0f;
+    public float grabbedMoveSpeed = 0.8f; 
+    public float maxGrabTime = 3.0f;
+    private float currentGrabTime = 0f; 
 
-    [Header("打铁设置")]
-    [Tooltip("被左手抓住后，需要等待多少秒才能砍")]
-    public float waitTimeBeforeCut = 2.0f; 
+    [Header("音效与震动设置 (Feedback)")]
+    public AudioClip warningSound;
+    public AudioClip grabSound;
+    public AudioClip cutSound;
+    [Tooltip("左手持续摩擦的震动强度 (0~1)")]
+    public float leftVibrateIntensity = 0.5f;
+    [Tooltip("右手切断瞬间的爆发震动强度 (0~1)")]
+    public float rightCutVibrateIntensity = 1.0f;
 
-    // 定义铁管的四种状态
-    private enum PipeState { Flying, InZone, Grabbed, ReadyToCut }
+    private enum PipeState { Flying, InZone, ReadyToCut }
     private PipeState currentState = PipeState.Flying;
 
-    private float timer = 0f;
+    private IronCutHUD hudManager;
+    private Vector3 startPos;
+    private bool isCounting = false;
 
     void Start()
     {
-        // 【修复2】把销毁代码放在 Start 里！
-        // 铁管一出生就开始倒计时，5秒后必定销毁，绝不占用内存
-        Destroy(gameObject, 5f);
+        hudManager = FindObjectOfType<IronCutHUD>();
+        Destroy(gameObject, 8f); 
+
+        if (warningSound != null) AudioSource.PlayClipAtPoint(warningSound, transform.position);
     }
 
     void Update()
     {
-        // 状态1和2：如果没有被抓住，就一直往前飞
         if (currentState == PipeState.Flying || currentState == PipeState.InZone)
         {
-            // 这是你要的最重要的代码行：向我的正前方、基于自身局部坐标移动
             transform.Translate(Vector3.up * moveSpeed * Time.deltaTime, Space.Self);
-
-            // ⚠️ 物理清理代码（之前给你的正确版代码已经去掉了 Update 里的 Destroy，请确认你使用的是正确版本）
         }
-        // 状态3：被左手抓住了，停在原地开始倒计时
-        else if (currentState == PipeState.Grabbed)
+        else if (currentState == PipeState.ReadyToCut)
         {
-            timer += Time.deltaTime;
-            if (timer >= waitTimeBeforeCut)
+            transform.Translate(Vector3.up * grabbedMoveSpeed * Time.deltaTime, Space.Self);
+            currentGrabTime += Time.deltaTime;
+            
+            // ====== 核心修改 1：只要还抓着，左手就持续震动！ ======
+            // OVRInput 的震动最多维持2秒，所以必须在 Update 里不断激活它
+            OVRInput.SetControllerVibration(leftVibrateIntensity, leftVibrateIntensity, OVRInput.Controller.LTouch);
+
+            if (currentGrabTime >= maxGrabTime)
             {
-                Debug.Log("叮！铁管烧红了！现在可以砍了！");
-                currentState = PipeState.ReadyToCut; // 进入可切断状态
-                
-                // 视觉提示：把铁管变成红色，提醒玩家可以砍了！
-                GetComponent<Renderer>().material.color = Color.red;
+                Debug.Log("超时报废！");
+                if (hudManager != null) hudManager.EvaluateCut(-999f);
+                Destroy(gameObject); // 这里销毁会触发底部的 OnDestroy 关掉震动
             }
+        }
+
+        if (isCounting && hudManager != null)
+        {
+            float distanceTravelled = Vector3.Distance(transform.position, startPos);
+            hudManager.UpdatePhysicalDistance(distanceTravelled);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // 1. 铁管碰到了黄色的判定框 -> 变成【可抓取】状态
+        if (other.CompareTag("StartZone") && !isCounting)
+        {
+            startPos = transform.position; 
+            isCounting = true; 
+        }
+
         if (other.CompareTag("Zone") && currentState == PipeState.Flying)
         {
             currentState = PipeState.InZone;
         }
 
-        // 2. 碰到了左手 -> 【改动】：去掉前置条件，只要左手碰到，无脑抓住！
         if (other.CompareTag("LeftHand")) 
         {
-            currentState = PipeState.Grabbed; // 改变状态，停止移动
-            Debug.Log("左手抓住了！开始加热...");
-            
-            // 让铁管变成左手的子物体
-            transform.SetParent(other.transform); 
+            if (currentState == PipeState.Flying || currentState == PipeState.InZone)
+            {
+                currentState = PipeState.ReadyToCut; 
+                GetComponent<Renderer>().material.color = Color.red;
+                currentGrabTime = 0f; 
+
+                if (grabSound != null) AudioSource.PlayClipAtPoint(grabSound, transform.position);
+            }
         }
 
-        // 3. 碰到了右手拿的刀！
         if (other.CompareTag("Knife"))
         {
             if (currentState == PipeState.ReadyToCut)
             {
-                Debug.Log("Perfect! 完美的锻造！");
-                
-                // 【新增：一刀砍断，增加 10 分！】
-                // 【修改：呼叫 BlacksmithManager 加分！】
-                if (BlacksmithManager.Instance != null)
+                if (hudManager != null)
                 {
-                    BlacksmithManager.Instance.AddScore(10);
+                    float finalDist = isCounting ? Vector3.Distance(transform.position, startPos) : 0f;
+                    hudManager.EvaluateCut(finalDist);
                 }
 
-                Destroy(gameObject);
-            }
-            else if (currentState == PipeState.Grabbed)
-            {
-                Debug.Log("Bad! 太急了，还没烧红呢！");
-            }
-            else
-            {
-                Debug.Log("Bad! 必须先用左手接住它！");
+                if (cutSound != null) AudioSource.PlayClipAtPoint(cutSound, transform.position);
+
+                // ====== 核心修改 2：不立刻销毁，启动右手震动结算协程 ======
+                StartCoroutine(CutAndVibrateRightHand());
             }
         }
+    }
+
+    // ====== 核心修改 3：完美的切割反馈协程 ======
+    private IEnumerator CutAndVibrateRightHand()
+    {
+        // 1. 关掉网格和碰撞体（视觉和物理上，铁管已经消失了，玩家觉得已经被切断）
+        GetComponent<Renderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+
+        // 2. 停掉左手的摩擦震动，瞬间启动右手的最强震动！
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+        OVRInput.SetControllerVibration(rightCutVibrateIntensity, rightCutVibrateIntensity, OVRInput.Controller.RTouch);
+
+        // 3. 让右手震动保持 0.15 秒（这是刀剑切割最干脆的震动时长）
+        yield return new WaitForSeconds(0.15f);
+
+        // 4. 彻底销毁这个铁管（依然会触发底部的 OnDestroy 确保安全关停）
+        Destroy(gameObject);
+    }
+
+    // ====== 终极安全锁：不管铁管怎么死，死前必须关掉双手震动 ======
+    private void OnDestroy()
+    {
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
     }
 }

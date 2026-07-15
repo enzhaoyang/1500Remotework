@@ -67,13 +67,13 @@ static Il2CppMethodPointer s_methodPointers[28] =
 };
 static const int32_t s_InvokerIndices[28] = 
 {
-	30359,
+	30360,
 	18049,
-	28910,
-	28910,
-	28910,
-	28910,
-	30214,
+	28911,
+	28911,
+	28911,
+	28911,
+	30215,
 	6894,
 	17835,
 	5114,
@@ -94,7 +94,7 @@ static const int32_t s_InvokerIndices[28] =
 	18049,
 	13612,
 	13686,
-	30316,
+	30317,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Meta_XR_ImmersiveDebugger_Interface_CodeGenModule;
 const Il2CppCodeGenModule g_Meta_XR_ImmersiveDebugger_Interface_CodeGenModule = 
